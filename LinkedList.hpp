@@ -13,6 +13,15 @@ class LinkedList
 {
 public:
 	typedef void(*IterateFunc)(T*);
+	
+	template<class UserClass> struct ClassIterator
+	{
+		typedef void(*_Func)(UserClass*, T*);
+		UserClass* userClass;
+		_Func func;
+		inline ClassIterator(UserClass* _class, _Func _func) : userClass(_class), func(_func) {}
+		inline void Invoke(T* data) { std::invoke(func, *userClass, data) };
+	};
 
 	struct Node {
 		T* data;
@@ -167,11 +176,11 @@ public:
 	}
 
 	template<class UserClass>
-	void Iterate(UserClass* userClass, IterateFunc func) const
+	void IterateClass(ClassIterator<UserClass> iterator) const
 	{
 		Node* currentNode = rootNode;
 		do {
-			std::invoke(func, *userClass, currentNode->data);
+			iterator.Invoke(currentNode->data);
 			currentNode = currentNode->next;
 		}
 		while (currentNode->next != nullptr);
