@@ -24,8 +24,14 @@ public:
 
 class UserClass
 {
+    int value;
 public:
     void Run(Test* test);
+    void Run2(const LinkedList<Test>& list) {
+    	list.Iterate(this, [](Test* test) {
+		test->data += value;
+	});
+    }
 };
 
 ```
@@ -54,11 +60,4 @@ linkedList.IterateClass<UserClass>(
     })
 );
 
-linkedList.IterateClass<UserClass>(
-{ 
-    userClass, [](UserClass* userClass, Test* test)
-    {
-        userClass->Run(test);
-    }
-});
 ```
