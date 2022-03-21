@@ -38,9 +38,9 @@ public:
 
 ```cpp
 LinkedList<Test> linkedList =  LinkedList<Test>();
-auto testChild = new TestChild(2);
+auto testChild = new TestChild(1);
 linkedList.AddFront(testChild);
-linkedList.AddFront(new Test(1));
+linkedList.AddFront(new Test(2));
 linkedList.AddFront(new Test(3));
 
 linkedList.AddBack(new Test(4));
