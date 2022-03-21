@@ -1,5 +1,5 @@
-# C-LinkedList
-LinkedList
+# CPP-LinkedList
+Simple and efficient linked list data structure
 
 ```cpp
 
