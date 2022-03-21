@@ -10,7 +10,7 @@ public:
 	Test() { }
 	Test(int _data) : data(_data) { }
 	~Test() { }
-    virtual int GetData() const { return data; };
+        virtual int GetData() const { return data; };
 };
 
 class TestChild : public Test
