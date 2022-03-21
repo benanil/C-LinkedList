@@ -59,5 +59,12 @@ linkedList.IterateClass<UserClass>(
         userClass->Run(test);
     })
 );
-
+// easier way for classes
+linkedList.IterateClass<UserClass>(
+{ 
+    userClass, [](UserClass* userClass, Test* test)
+    {
+        userClass->Run(test);
+    }
+});
 ```
