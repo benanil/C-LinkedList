@@ -3,7 +3,6 @@
 #define CASTLE_LINKED_LIST
 
 #include <vector>
-#include <functional>
 #include <type_traits>
 
 // this could be usefull for class pointers. not suitable for structures such as vectors
@@ -38,14 +37,7 @@ public:
 
 	LinkedList(Node* _rootNode) : rootNode(_rootNode), endNode(_rootNode), nodeCount(1) { }
 	
-	// do not initialize with stack allocated array
-	LinkedList(T** array, int arraySize) : nodeCount(arraySize) {
-		for (int i = 0; i < arraySize; ++i) 
-		{
-			AddFront(array[i]);
-		}
-	}
-
+	// converts to 
 	LinkedList(const std::vector<T*>& vector) : nodeCount(vector.size())
 	{
 		for (int i = 0; i < vector.size(); ++i) 
