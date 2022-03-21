@@ -20,7 +20,7 @@ public:
 		UserClass* userClass;
 		_Func func;
 		inline ClassIterator(UserClass* _class, _Func _func) : userClass(_class), func(_func) {}
-		inline void Invoke(T* data) { std::invoke(func, *userClass, data) };
+		inline void Invoke(T* data) { func(userClass, data); };
 	};
 
 	struct Node {
@@ -179,11 +179,12 @@ public:
 	void IterateClass(ClassIterator<UserClass> iterator) const
 	{
 		Node* currentNode = rootNode;
-		do {
-			iterator.Invoke(currentNode->data);
+		iterator.Invoke(currentNode->data);
+
+		while (currentNode->next != nullptr) {
 			currentNode = currentNode->next;
+			iterator.Invoke(currentNode->data);
 		}
-		while (currentNode->next != nullptr);
 	}
 
 private:
