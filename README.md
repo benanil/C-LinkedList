@@ -37,15 +37,24 @@ public:
 ```
 
 ```cpp
+// initialize like this
 LinkedList<Test> linkedList =  LinkedList<Test>();
-auto testChild = new TestChild(1);
-linkedList.AddFront(testChild);
+// or you can initialize like this
+LinkedList<Test> linkedList = LinkedList<Test>({new Test(1), new Test(2), new Test(2) });
+// add elements like this
+linkedList.AddFront(new TestChild(1));
 linkedList.AddFront(new Test(2));
 linkedList.AddFront(new Test(3));
-
-linkedList.AddBack(new Test(4));
-
+linkedList.AddBack(new Test(0));
+linkedList.AddBack(new Test(-1));
+// reach elements like this
+TestChild* testChild = linkedList[0];
+testChild = linkedList.FindNodeByType<TestChild>();
+// remove elements like this
 linkedList.Remove(testChild);
+delete linkedList.RemoveFront(); 
+Test* removed = linkedList.RemoveBack();
+
 auto userClass = new UserClass();
 
 linkedList.Iterate([](Test* test) {
