@@ -28,9 +28,11 @@ class UserClass
 public:
     void Run(Test* test);
     void Run2(const LinkedList<Test>& list) {
-    	list.Iterate(this, [](UserClass* _this,Test* test) {
-		test->data += _this->value;
-	});
+    	list.IterateClass(
+        LinkedList<Test>::ClassIterator<UserClass>(this, [](UserClass* _this, Test* test)
+        {
+            test->data += _this->value;
+        }));
     }
 };
 
