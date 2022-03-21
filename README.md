@@ -30,7 +30,7 @@ public:
 
 ```
 
-```
+```cpp
 LinkedList<Test> linkedList =  LinkedList<Test>();
 auto testChild = new TestChild(2);
 linkedList.AddFront(testChild);
