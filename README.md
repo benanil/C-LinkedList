@@ -1,5 +1,6 @@
 # CPP-LinkedList
 Simple and efficient linked list data structure
+you can also use this list as queue and stack
 
 ```cpp
 
