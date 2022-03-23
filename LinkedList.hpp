@@ -64,11 +64,13 @@ public:
 	_Template void AddFront(Derived* data)
 	{
 		Node* newNode = new Node(dynamic_cast<T*>(data), nullptr);
-		if (!endNode)  {
+		if (endNode)  {
+			endNode->next = newNode;
+		}
+		else {
 			endNode = newNode;
 			rootNode = newNode;
 		}
-		endNode->next = newNode;
 		endNode = newNode;
 		nodeCount++;
 	}
@@ -117,9 +119,11 @@ public:
 	{
 		if (nodeCount == 0) return nullptr;
 		T* oldEndNodeData = endNode->data;
+		Node* oldNode = endNode;
 		--nodeCount;
 		endNode = FindSecondEndNodeRec(rootNode); // new end node
 		endNode->next = nullptr;
+		delete oldNode;
 		return oldEndNodeData;
 	}
 
@@ -129,8 +133,10 @@ public:
 	{
 		if (!rootNode->next) return nullptr;
 		T* oldRootNodeData = rootNode->data;
+		Node* oldNode = rootNode;
 		--nodeCount;
 		rootNode = rootNode->next;
+		delete oldNode;
 		return oldRootNodeData;
 	}
 
@@ -220,8 +226,9 @@ private:
 
 	void IterateRecDestroy(Node* node) 
 	{
+		if (!node) return;
 		if(node->next != nullptr)
-		IterateRecDestroy(node->next);
+			IterateRecDestroy(node->next);
 		node->data->~T();
 		free(node->data);
 		free(node);
