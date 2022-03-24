@@ -58,10 +58,7 @@ public:
 		return FindDataByIndexRec(rootNode, index, startIndex);
 	}
 	
-	#define _Template template<typename Derived, typename std::enable_if < \
-		std::is_base_of<T, Derived>{} || std::is_same<T, Derived>{}, bool > ::type = true >
-	
-	_Template void AddFront(Derived* data)
+	template<typename Derived> void AddFront(Derived* data)
 	{
 		Node* newNode = new Node(dynamic_cast<T*>(data), nullptr);
 		if (endNode)  {
@@ -76,14 +73,14 @@ public:
 	}
 
 	// sets data as first node(root node)
-	_Template void AddBack(Derived* data)
+	template<typename Derived> void AddBack(Derived* data)
 	{
 		Node* oldRoot = rootNode;
 		rootNode = new Node(dynamic_cast<T*>(data), oldRoot);
 		nodeCount++;
 	}
 
-	_Template void Remove(Derived* ptr)
+	template<typename Derived> void Remove(Derived* ptr)
 	{
 		Node* currentNode = rootNode;
 	
@@ -106,13 +103,11 @@ public:
 		} while (currentNode->next != nullptr);
 	}
 
-	_Template bool TryGetData(Derived** component)
+	template<typename Derived> bool TryGetData(Derived** component)
 	{
 		*component = FindNodeByType<Derived>();
 		return component[0];
 	}
-
-	#undef _Template
 
 	// returns removed data
 	T* RemoveFront() 
@@ -131,7 +126,7 @@ public:
 	// removes first node(root node)
 	T* RemoveBack()
 	{
-		if (!rootNode->next) return nullptr;
+		if (!rootNode) return nullptr;
 		T* oldRootNodeData = rootNode->data;
 		Node* oldNode = rootNode;
 		--nodeCount;
