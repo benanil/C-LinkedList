@@ -71,12 +71,10 @@ linkedList.IterateClass<UserClass>(
         userClass->Run(test);
     })
 );
-// easier way for classes
-linkedList.IterateClass<UserClass>(
-{ 
-    userClass, [](UserClass* userClass, Test* test)
-    {
-        userClass->Run(test);
-    }
-});
+// easier way of iterating
+for (auto* rootNode = linkedList.rootNode; 
+	rootNode->next != nullptr; rootNode = rootNode->next)
+{
+	// do something
+}
 ```
